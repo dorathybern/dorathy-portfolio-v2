@@ -55,3 +55,43 @@
         });
     }
 })();
+
+/* Mobile menu (hamburger) */
+(function () {
+    "use strict";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var toggle = document.getElementById("menuToggle");
+        var links = document.getElementById("navLinks");
+
+        if (!toggle || !links) return;
+
+        function setOpen(open) {
+            links.classList.toggle("is-open", open);
+            toggle.setAttribute("aria-expanded", String(open));
+            toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        }
+
+        toggle.addEventListener("click", function () {
+            setOpen(toggle.getAttribute("aria-expanded") !== "true");
+        });
+
+        // Close after choosing a page (the day/night row stays open on purpose)
+        links.addEventListener("click", function (event) {
+            if (event.target.closest("a")) setOpen(false);
+        });
+
+        // Close with Escape or by tapping outside the header
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") setOpen(false);
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".site-header")) setOpen(false);
+        });
+
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 680) setOpen(false);
+        });
+    });
+})();
