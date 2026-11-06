@@ -1686,6 +1686,11 @@ textarea {
    Mobile menu (hamburger)
    ========================================================== */
 
+
+/* ==========================================================
+   Mobile menu (hamburger)
+   ========================================================== */
+
 .menu-toggle,
 .nav-icon,
 .theme-label,
@@ -1720,7 +1725,7 @@ textarea {
 
     /* Hamburger button */
     .menu-toggle {
-        display: inline-flex !important;
+        display: inline-flex;
         position: relative;
         z-index: 10;
         flex-direction: column;
@@ -1730,12 +1735,14 @@ textarea {
         flex-shrink: 0;
         width: 46px;
         height: 46px;
+        padding: 0;
         background: var(--sage);
         border: 0;
         border-radius: 12px;
         color: var(--text);
         cursor: pointer;
-        transition: background-color 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.25s ease;
     }
 
     .menu-toggle span {
@@ -1768,7 +1775,7 @@ textarea {
         outline-offset: 3px;
     }
 
-    /* The menu panel */
+    /* Dropdown menu */
     .nav-links {
         display: none;
         position: absolute;
@@ -1797,29 +1804,35 @@ textarea {
         width: 100%;
     }
 
+    /* Navigation links */
     .nav-links a {
+        display: flex;
+        align-items: center;
         gap: 14px;
         width: 100%;
         min-height: 50px;
         padding: 0 16px;
         border-radius: 12px;
         font-size: 1rem;
+        -webkit-tap-highlight-color: transparent;
+        transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .nav-links a::after {
         display: none;
     }
 
+    /* One consistent green for every selection state */
     .nav-links a:hover,
-    .nav-links a:focus-visible {
-        background: var(--hover-bg);
-    }
-
+    .nav-links a:focus,
+    .nav-links a:focus-visible,
+    .nav-links a:active,
     .nav-links a[aria-current="page"] {
         background: var(--sage);
         color: var(--text);
     }
 
+    /* Navigation icons */
     .nav-icon {
         display: block;
         flex-shrink: 0;
@@ -1830,6 +1843,80 @@ textarea {
         stroke-width: 1.7;
         stroke-linecap: round;
         stroke-linejoin: round;
+    }
+
+    /* Dark mode row */
+    .nav-links li:last-child {
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+    }
+
+    .theme-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        height: auto;
+        min-height: 50px;
+        padding: 0 16px;
+        justify-content: flex-start;
+        border: 0;
+        border-radius: 12px;
+        color: var(--nav-link);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:active,
+    .theme-toggle:focus-visible {
+        background: var(--sage);
+        transform: none;
+    }
+
+    .theme-toggle svg {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
+    }
+
+    .theme-label {
+        display: block;
+        flex: 1;
+        text-align: left;
+        font: 600 1rem var(--sans);
+    }
+
+    .theme-switch {
+        display: block;
+        position: relative;
+        flex-shrink: 0;
+        width: 46px;
+        height: 26px;
+        border-radius: 999px;
+        background: var(--sage);
+        transition: background-color 0.2s ease;
+    }
+
+    .theme-switch::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #fffdf8;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        transition: transform 0.2s ease;
+    }
+
+    :root[data-theme="dark"] .theme-switch {
+        background: var(--green);
+    }
+
+    :root[data-theme="dark"] .theme-switch::after {
+        transform: translateX(20px);
     }
 
     /* Dark mode row with a switch */
