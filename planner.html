@@ -72,14 +72,14 @@
                 <form id="academicTaskForm">
                     <div class="planner-field">
                         <label for="taskInput">TASK TITLE</label>
-                        <input id="taskInput" name="task" type="text" placeholder="e.g. Complete COS 106 assessment" maxlength="180" required>
+                        <input id="taskInput" name="task" type="text" placeholder="e.g. School assessment" maxlength="180" required>
                     </div>
 
                     <div class="planner-form-grid">
                         <div class="planner-field">
                             <label for="taskCategory">CATEGORY / COURSE</label>
                             <select id="taskCategory" name="category">
-                                <option value="Intro to Web Technologies">Intro to Web Technologies</option>
+                                <option value="Web Technologies">Web Technologies</option>
                                 <option value="Programming">Programming</option>
                                 <option value="Systems Analysis and Design">Systems Analysis and Design</option>
                                 <option value="Software Engineering">Software Engineering</option>
@@ -398,7 +398,7 @@
                 renderTasks();
 
                 taskForm.reset();
-                taskCategory.value = "Intro to Web Technologies";
+                taskCategory.value = "Web Technologies";
                 taskPriority.value = "medium";
 
                 showMessage(saved
