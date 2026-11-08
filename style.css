@@ -766,8 +766,7 @@ main {
     box-shadow: var(--shadow);
 }
 
-/* The video is 2px taller than its frame; the frame trims the extra,
-   which hides any thin dark line at the bottom edge of the video file. */
+/* Video adjustment. */
 .about-media-card video {
     display: block;
     width: 100%;
@@ -1862,10 +1861,12 @@ textarea {
         -webkit-tap-highlight-color: transparent;
     }
 
+    /* Only the switch changes colour, never the whole row */
     .theme-toggle:hover,
     .theme-toggle:active,
+    .theme-toggle:focus,
     .theme-toggle:focus-visible {
-        background: var(--sage);
+        background: transparent;
         transform: none;
     }
 
