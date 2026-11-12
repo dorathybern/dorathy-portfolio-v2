@@ -1,6 +1,8 @@
-/* Day / night theme switcher
-   - Uses the saved choice if there is one, otherwise the device setting.
-   - Loaded in <head> so the right theme is applied before the page paints. */
+
+/* =====================================================
+   1. DAY AND NIGHT THEME SWITCHER
+   Uses saved preference or device theme.
+===================================================== */
 (function () {
     "use strict";
 
@@ -20,6 +22,7 @@
         return query && query.matches ? "dark" : "light";
     }
 
+    /* APPLY SELECTED THEME */
     function apply(theme) {
         root.setAttribute("data-theme", theme);
 
@@ -33,6 +36,7 @@
         if (meta) meta.setAttribute("content", theme === "dark" ? "#0e1814" : "#18352b");
     }
 
+    /* LOAD SAVED OR DEVICE THEME */
     apply(getSaved() || systemTheme());
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -49,6 +53,7 @@
         });
     });
 
+    /* DETECT DEVICE THEME CHANGES */
     if (query && query.addEventListener) {
         query.addEventListener("change", function () {
             if (!getSaved()) apply(systemTheme());
@@ -56,7 +61,11 @@
     }
 })();
 
-/* Mobile menu (hamburger) */
+
+/* =====================================================
+   2. MOBILE NAVIGATION MENU (HAMBURGER)
+   Controls opening and closing of the mobile menu.
+===================================================== */
 (function () {
     "use strict";
 
@@ -76,12 +85,12 @@
             setOpen(toggle.getAttribute("aria-expanded") !== "true");
         });
 
-        // Close after choosing a page (the day/night row stays open on purpose)
+        /* CLOSE MENU AFTER PAGE SELECTION */
         links.addEventListener("click", function (event) {
             if (event.target.closest("a")) setOpen(false);
         });
 
-        // Close with Escape or by tapping outside the header
+        /* CLOSE MENU WITH ESCAPE OR OUTSIDE CLICK */
         document.addEventListener("keydown", function (event) {
             if (event.key === "Escape") setOpen(false);
         });
@@ -90,6 +99,7 @@
             if (!event.target.closest(".site-header")) setOpen(false);
         });
 
+        /* RESET MENU ON DESKTOP SCREEN SIZES */
         window.addEventListener("resize", function () {
             if (window.innerWidth > 680) setOpen(false);
         });
