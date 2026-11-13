@@ -24,7 +24,7 @@ A multi-page personal portfolio website built with HTML, CSS and JavaScript. It 
 
 - **Day and night mode:** Follows the visitor's device setting and remembers their choice.
 - **Academic Planner:** Add, complete, delete and filter tasks, with overdue and due-today detection. Tasks are saved in the browser using `localStorage`.
-- **Contact form:** Live validation (name, email, Nigerian phone number, message length) and real message delivery through Web3Forms.
+- **Contact form:** Live validation (name, email, phone number, message length) and real message delivery through Web3Forms.
 - **Responsive design:** Supports desktop, tablet and phone, with a hamburger menu on small screens.
 - **Smooth animations:** Includes hover effects and a reduced-motion option for visitors who prefer less movement.
 - **Accessibility:** Semantic HTML, labelled form fields, `aria-live` status messages, visible focus outlines and descriptive alt text.
