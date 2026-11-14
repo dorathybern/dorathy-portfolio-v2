@@ -108,5 +108,3 @@ A hidden spam-trap field blocks most bots. The Web3Forms access key is a public 
 
 Software Engineering Student  
 Miva Open University, Nigeria.
-
-**Email:** dorathydev0@gmail.com
