@@ -51,6 +51,7 @@
                 <span></span>
             </button>
 
+            <!-- NAVIGATION LINKS -->
             <ul class="nav-links" id="navLinks">
 
                 <li>
@@ -105,6 +106,8 @@
                 </li>
 
                 <li>
+
+                    <!-- DAY AND NIGHT THEME SWITCHER -->
                     <button
                         type="button"
                         class="theme-toggle"
@@ -405,6 +408,7 @@
 
             }
 
+            // CONVERTS A DATE STRING INTO A JAVASCRIPT DATE OBJECT.
             function parseDate(dateString) {
 
                 const parts = dateString.split("-").map(Number);
@@ -413,6 +417,7 @@
 
             }
 
+            // FORMATS THE DUE DATE FOR DISPLAY.
             function formatDueDate(dateString) {
 
                 if (!dateString) return "No due date set";
@@ -429,6 +434,7 @@
 
             }
 
+            // CHECKS WHETHER A TASK IS OVERDUE OR DUE TODAY.
             function getDueDateStatus(task) {
 
                 if (!task.dueDate || task.completed) return "";
@@ -449,6 +455,7 @@
 
             }
 
+            // CREATES AN HTML ELEMENT WITH AN OPTIONAL CLASS AND TEXT.
             function createElement(tagName, className, text) {
 
                 const element = document.createElement(tagName);
@@ -461,6 +468,7 @@
 
             }
 
+            // UPDATES THE TOTAL, PENDING AND COMPLETED TASK COUNTS.
             function updateSummary() {
 
                 const completed = tasks.filter(task => task.completed).length;
@@ -473,6 +481,7 @@
 
             }
 
+            // CREATES AND DISPLAYS AN INDIVIDUAL TASK.
             function createTaskItem(task) {
 
                 const item = createElement("article", "task-item");
@@ -501,18 +510,21 @@
 
                 checkbox.addEventListener("change", () => toggleTask(task.id));
 
+                // CREATES THE TASK TITLE.
                 const title = createElement("h3", "task-text", task.text);
 
                 if (task.completed) title.classList.add("task-completed-text");
 
                 heading.append(checkbox, title);
 
+                // DISPLAYS THE TASK CATEGORY AND DUE DATE.
                 const meta = createElement("div", "task-meta");
 
                 meta.appendChild(createElement("span", "task-category", task.category));
 
                 meta.appendChild(createElement("span", "task-due-date", formatDueDate(task.dueDate)));
 
+                // DISPLAYS THE DUE DATE STATUS WHEN NECESSARY.
                 const dueStatus = getDueDateStatus(task);
 
                 if (dueStatus) {
@@ -531,6 +543,7 @@
 
                 main.append(heading, meta);
 
+                // CREATES THE TASK PRIORITY AND DELETE BUTTON.
                 const actions = createElement("div", "task-actions");
 
                 actions.appendChild(createElement(
@@ -559,6 +572,7 @@
 
             }
 
+            // FILTERS TASKS ACCORDING TO THE SELECTED STATUS.
             function getFilteredTasks() {
 
                 return tasks.filter(task =>
@@ -573,6 +587,7 @@
 
             }
 
+            // DISPLAYS THE FILTERED TASKS AND UPDATES THE SUMMARY.
             function renderTasks() {
 
                 taskList.replaceChildren();
@@ -599,12 +614,14 @@
 
             }
 
+            // ADDS A NEW TASK TO THE PLANNER.
             function addTask(event) {
 
                 event.preventDefault();
 
                 const text = taskInput.value.trim();
 
+                // Check if the task title is empty.
                 if (!text) {
 
                     showMessage("Please enter a task title.");
@@ -615,6 +632,7 @@
 
                 }
 
+                // Stores the new task details.
                 tasks.unshift({
 
                     id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
@@ -631,6 +649,7 @@
 
                 });
 
+                // Saves the task and reset the active filter.
                 const saved = saveTasks();
 
                 currentFilter = "all";
@@ -645,6 +664,7 @@
 
                 });
 
+             // REFRESHES THE TASK LIST AND RESETS THE FORM.
                 renderTasks();
 
                 taskForm.reset();
@@ -652,7 +672,8 @@
                 taskCategory.value = "Web Technologies";
 
                 taskPriority.value = "medium";
-
+                
+                // Displays the appropriate message based on whether the task was saved successfully or not.
                 showMessage(saved
 
                     ? "Task added successfully."
@@ -663,6 +684,7 @@
 
             }
 
+            // TOGGLES THE COMPLETION STATUS OF A TASK.
             function toggleTask(taskId) {
 
                 tasks = tasks.map(task =>
@@ -675,6 +697,7 @@
 
                 );
 
+            // SAVES THE UPDATED TASK LIST AND REFRESHES THE DISPLAY.
                 saveTasks();
 
                 renderTasks();
@@ -691,6 +714,7 @@
 
             }
 
+            // DELETES A TASK FROM THE PLANNER.
             function deleteTask(taskId) {
 
                 if (!tasks.some(task => task.id === taskId)) return;
@@ -705,6 +729,7 @@
 
             }
 
+            // SETS THE CURRENT FILTER BASED ON THE BUTTON CLICKED.
             function setStatusFilter(event) {
 
                 const button = event.currentTarget;
@@ -725,6 +750,7 @@
 
             }
 
+            //Connects the form submission and filter buttons to their respective functions.
             taskForm.addEventListener("submit", addTask);
 
             filterButtons.forEach(button =>
@@ -733,6 +759,7 @@
 
             );
 
+            // LOADS SAVED TASKS AND DISPLAYS THEM WHEN THE PAGE OPENS.
             loadTasks();
 
             renderTasks();
